@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+		<!-- Bootstrap CSS -->
+        		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+
+				<link rel="stylesheet" href="css/style.css">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+	
+		
+
+
+		<title>SAMAA CARD!</title>
+
+	
+		  
+	</head>
+	<body>
+
+		<h3>بطاقة عيد الميلاد</h3>
+
+		<canvas id="pic_canvas" ></canvas>
+        <br>
+		<input type="text" placeholder=".. ادخل الاسم " id="source_text">
+		<button class="button button2" id="addBtn">انشئ البطاقة</button> 
+	
+
+		<br>
+
+		<div id='theText'>Created By Samaa Adel..</div>
+
+	
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+				var base_img = 'women.png' ;
+				var canvas = document.getElementById("pic_canvas");
+				var source_text = "";
+				
+				var imageObj = new Image();
+				var imgWidth;
+				var imgHeight;
+				
+				$("#addBtn").click(function(){
+					source_text = $("#source_text").val();
+					
+					if(source_text){
+						
+						startDraw(source_text);
+						
+						
+					}else{
+						alert("يرجى كتابة الاسم");
+					}
+					
+				});
+				
+				
+				function startDraw(data){
+					imageObj.src = base_img;
+					
+					imageObj.onload = function(){           // Wait till the image is loaded.
+
+						imgWidth = imageObj.width;
+						imgHeight = imageObj.height;
+                        
+						canvas.width  = imgWidth;
+						canvas.height = imgHeight;
+						var context = canvas.getContext("2d"); // Create canvas context
+						context.clearRect(0, 0, imgWidth, imgHeight);
+						context.drawImage(imageObj, 0, 0, imgWidth, imgHeight); // Draw the image.
+
+                        context.textBaseline = 'middle';
+                        context.textAlign = "center"
+						context.font = "40px 'Almarai',sans-serif";
+						context.fillStyle = "#563611";
+						data = data.replace(/\+/g, ' ');   // Download the processed image
+						context.fillText(decodeURIComponent(data), 540, 1026.7041);
+
+						
+						
+
+
+
+                        
+						
+					};
+					
+				}
+
+				
+			
+				startDraw(source_text);
+
+				
+
+			
+			})
+		</script>
+	</body>
+</html>
